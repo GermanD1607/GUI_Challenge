@@ -17,7 +17,7 @@ public class SignUpPage{
         this.driver = driver;
     }
 
-    public void Register(String fn,String ln,String pass,String mail){
+    public HomePage Register(String fn,String ln,String pass,String mail){
 
         driver.findElement(firstName).sendKeys(fn);
         driver.findElement(lastName).sendKeys(ln);
@@ -26,5 +26,6 @@ public class SignUpPage{
         WebDriverWait wait = new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(btnSignUp,0));
         driver.findElements(btnSignUp).get(0).click();
+        return new HomePage(driver);
     }
 }

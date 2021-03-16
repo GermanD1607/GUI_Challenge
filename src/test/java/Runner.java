@@ -8,7 +8,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class Runner extends Hooks{
@@ -34,11 +36,12 @@ public class Runner extends Hooks{
         driver.navigate().to(url+"/signup");
         SignUpPage signUp = new SignUpPage(driver);
         CerrarCookies();
-        signUp.Register(props.getProperty("first_name"), props.getProperty("last_name"),
+        HomePage home = signUp.Register(props.getProperty("first_name"), props.getProperty("last_name"),
                 props.getProperty("user_password"),props.getProperty("user_email"));
+        assertTrue(home.GetUserIcon().isDisplayed());
     }
     @DataProvider(name ="mails")
-    public Object[][] endpoints(){
+    public Object[][] testData(){
         return new Object[][]{
                 {"invalid@mail"},
                 {props.getProperty("login_mail")}
@@ -47,45 +50,48 @@ public class Runner extends Hooks{
     @Test(dataProvider = "mails")
     public void loginTest(String email){
         driver.navigate().to(url);
-        LogInPage login = new LogInPage(driver);
-        login.Open();
-        login.Log(email,props.getProperty("user_password"));
-        SearchPage home = new SearchPage(driver);
-        assertTrue(home.IconUser().isDisplayed());
+        HomePage home = new HomePage(driver);
+        LogInPage login = home.OpenLogin();
+        home = login.Log(email,props.getProperty("user_password"));
+        if(email.contains("invalid")){
+            assertTrue(home.GetLoginButton().isDisplayed());
+        }else {
+            assertTrue(home.GetUserIcon().isDisplayed());
+        }
     }
     @Test
     public void searchTest(){
         driver.navigate().to(url);
-        SearchPage search = new SearchPage(driver);
-
-        ResultsPage results = search.search(props.getProperty("search_data"));
+        HomePage home = new HomePage(driver);
+        ResultsPage results = home.Search(props.getProperty("search_data"));
         CerrarCookies();
-        assertTrue(results.getItem(0).contains(props.getProperty("search_data")));
+        assertTrue(results.GetItem(0).contains(props.getProperty("search_data")));
     }
     @Test
     public void categoriesTest(){
         driver.navigate().to(url);
-        CategoriesPage categories = new CategoriesPage(driver);
-        categories.select();
-        categories.search();
+        HomePage home = new HomePage(driver);
+        home.SelectCategory();
+        CategoriesPage categories = home.SelectElement();
         System.out.println("Titulo: "+categories.getTitle());
         assertTrue(categories.getTitle().equals(props.getProperty("browse_data")));
     }
     @Test
     public void filterPriceTest(){
         driver.navigate().to(url);
-        SearchPage search = new SearchPage(driver);
-        ResultsPage results = search.search(props.getProperty("filter_data"));
-        results.filter();
-        assertTrue(results.getPrice(0)>1200 && results.getPrice(0)<2300);
+        HomePage home = new HomePage(driver);
+        ResultsPage results = home.Search(props.getProperty("filter_data"));
+        CerrarCookies();
+        results.Filter();
+        assertTrue(results.GetPrice(0)>1200 && results.GetPrice(0)<2300);
     }
     @Test
     public void orderPriceTest(){
         driver.navigate().to(url);
-        SearchPage search = new SearchPage(driver);
-        ResultsPage results = search.search(props.getProperty("order_data"));
+        HomePage home = new HomePage(driver);
+        ResultsPage results = home.Search(props.getProperty("order_data"));
         CerrarCookies();
-        results.order();
-        assertTrue(results.getPrice(0)>results.getPrice(1));
+        results.Order();
+        assertTrue(results.GetPrice(0)>results.GetPrice(1));
     }
 }
