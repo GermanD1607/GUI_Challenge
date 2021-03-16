@@ -39,6 +39,7 @@ public class Runner extends Hooks{
         HomePage home = signUp.Register(props.getProperty("first_name"), props.getProperty("last_name"),
                 props.getProperty("user_password"),props.getProperty("user_email"));
         assertTrue(home.GetUserIcon().isDisplayed());
+        home.LogOut();
     }
     @DataProvider(name ="mails")
     public Object[][] testData(){
@@ -57,6 +58,7 @@ public class Runner extends Hooks{
             assertTrue(home.GetLoginButton().isDisplayed());
         }else {
             assertTrue(home.GetUserIcon().isDisplayed());
+            home.LogOut();
         }
     }
     @Test
@@ -73,7 +75,6 @@ public class Runner extends Hooks{
         HomePage home = new HomePage(driver);
         home.SelectCategory();
         CategoriesPage categories = home.SelectElement();
-        System.out.println("Titulo: "+categories.getTitle());
         assertTrue(categories.getTitle().equals(props.getProperty("browse_data")));
     }
     @Test

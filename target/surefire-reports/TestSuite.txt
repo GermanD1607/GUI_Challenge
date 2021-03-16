@@ -1,0 +1,25 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 88.594 s <<< FAILURE! - in TestSuite
+filterPriceTest(Runner)  Time elapsed: 8.053 s  <<< FAILURE!
+java.lang.AssertionError: 
+	at Runner.filterPriceTest(Runner.java:87)
+
+orderPriceTest(Runner)  Time elapsed: 9.587 s  <<< FAILURE!
+java.lang.AssertionError: 
+	at Runner.orderPriceTest(Runner.java:96)
+
+signUpTest(Runner)  Time elapsed: 2.707 s  <<< FAILURE!
+org.openqa.selenium.NoSuchElementException: 
+no such element: Unable to locate element: {"method":"xpath","selector":"//li/div[@class='site-header__nav__link__icon']"}
+  (Session info: chrome=89.0.4389.90)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'EN911195', ip: '192.168.100.229', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_281'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 89.0.4389.90, chrome: {chromedriverVersion: 88.0.4324.96 (68dba2d8a0b14..., userDataDir: C:\Users\gvanegas\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:49292}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: af4f35a37d64a66ec9e6b5bb7546949a
+*** Element info: {Using=xpath, value=//li/div[@class='site-header__nav__link__icon']}
+	at Runner.signUpTest(Runner.java:41)
+

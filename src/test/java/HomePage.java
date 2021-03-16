@@ -11,6 +11,9 @@ public class HomePage {
     private By icon = By.xpath("//li/div[@class='site-header__nav__link__icon']");
     private By btnCategory = By.cssSelector(".category-flyout-header__link");
     private By btnResult = By.cssSelector(".category-flyout__column__section a");
+    private By btnOut = By.xpath("//li/a/div[@class='size-80 opacity-70']");
+    private By result = By.xpath("//div[@class='category-flyout__column__section']/h3/a");
+    //private By btnOut = By.cssSelector(".size-80.opacity-70");
 
     private WebDriver driver;
 
@@ -27,8 +30,8 @@ public class HomePage {
     }
     public CategoriesPage SelectElement(){
         WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(btnResult,1));
-        driver.findElements(btnResult).get(0).click();
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(result,0));
+        driver.findElements(result).get(11).click();
         return new CategoriesPage(driver);
     }
     public ResultsPage Search(String words){
@@ -46,6 +49,10 @@ public class HomePage {
         return driver.findElement(btnLogin);
     }
     public void LogOut(){
+        driver.findElement(icon).click();
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(btnOut,0));
+        driver.findElement(btnOut).click();
 
     }
 }
