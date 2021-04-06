@@ -1,0 +1,7 @@
+Pages\LogInPage.class
+Pages\SignUpPage.class
+Pages\CategoriesPage.class
+Pages\ResultsPage.class
+Pages\HomePage.class
+Runner.class
+Hooks.class

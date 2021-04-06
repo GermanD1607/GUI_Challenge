@@ -1,10 +1,11 @@
+package Pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-public class CategoriesPage{
+public class CategoriesPage {
     private WebDriver driver;
 
     private By title = By.cssSelector("h1");

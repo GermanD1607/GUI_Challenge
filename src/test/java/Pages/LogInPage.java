@@ -1,3 +1,5 @@
+package Pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +16,7 @@ public class LogInPage {
         this.driver = driver;
     }
 
-    public HomePage Log(String name, String pass){
+    public HomePage log(String name, String pass){
         WebDriverWait wait = new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(userName,0));
         driver.findElement(userName).sendKeys(name);
